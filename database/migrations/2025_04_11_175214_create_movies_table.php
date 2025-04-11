@@ -11,15 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('theatre_management', function (Blueprint $table) {
+        Schema::create('movies', function (Blueprint $table) {
             $table->id();
-            $table->string('theatre_name');
-            $table->string('city');
-            $table->integer('no_of_screens');
-            $table->json('movie_list'); // Store as JSON to handle multiple movies
+            $table->string('title');
+            $table->text('description')->nullable();
+            $table->time('duration');
+            $table->string('language');
+            $table->string('genre');
+            $table->string('poster_url')->nullable();
+            $table->enum('type', ['Movie', 'Theatre Play']);
             $table->timestamps();
         });
-
     }
 
     /**
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('theatre_management');
+        Schema::dropIfExists('movies');
     }
 };

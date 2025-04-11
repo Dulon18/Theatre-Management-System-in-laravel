@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('movies', function (Blueprint $table) {
-            $table->id('movie_id');
-            $table->string('movie_name');
-            $table->string('genre');
-            $table->integer('duration'); // Duration in minutes
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->enum('role', ['Admin', 'Staff', 'Customer'])->default('Customer');
+            $table->rememberToken();
             $table->timestamps();
         });
-
     }
 
     /**
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('movies');
+        Schema::dropIfExists('users');
     }
 };

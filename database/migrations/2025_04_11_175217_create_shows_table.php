@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rest_rooms', function (Blueprint $table) {
+        Schema::create('shows', function (Blueprint $table) {
             $table->id();
-            $table->integer('no_of_slots');
+            $table->foreignId('movie_id')->constrained('movies')->onDelete('cascade');
+            $table->foreignId('screen_id')->constrained('screens')->onDelete('cascade');
+            $table->dateTime('start_time');
+            $table->dateTime('end_time');
+            $table->decimal('price', 8, 2);
             $table->timestamps();
         });
-
     }
 
     /**
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rest_rooms');
+        Schema::dropIfExists('shows');
     }
 };

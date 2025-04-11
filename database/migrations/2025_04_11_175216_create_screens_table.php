@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('customers', function (Blueprint $table) {
-            $table->id('customer_id');
-            $table->string('customer_name');
-            $table->integer('customer_age');
-            $table->string('customer_gender');
+        Schema::create('screens', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->integer('total_seats');
+            $table->json('layout')->nullable();
             $table->timestamps();
         });
-
     }
 
     /**
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists('screens');
     }
 };

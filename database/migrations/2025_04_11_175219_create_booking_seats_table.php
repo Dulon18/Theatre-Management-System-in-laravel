@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('employees', function (Blueprint $table) {
-            $table->id('employee_id');
-            $table->string('employee_name');
-            $table->string('designation');
-            $table->decimal('salary', 10, 2);
+        Schema::create('booking_seats', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('booking_id')->constrained('bookings')->onDelete('cascade');
+            $table->string('seat_number');
             $table->timestamps();
         });
-
     }
 
     /**
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('employees');
+        Schema::dropIfExists('booking_seats');
     }
 };
